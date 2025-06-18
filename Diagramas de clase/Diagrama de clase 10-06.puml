@@ -1,0 +1,89 @@
+@startuml clase
+
+class "Proveedor" as proveedor {
+  +String nombre
+  +String apellido
+  +String razonSocial
+  +cuit
+  +condIva
+  +domicilio: Domicilio
+  +telefono
+  +email
+  -crear()
+  -mostrar()
+  -conocerDomicilio()
+}
+
+class "Compras" as compras {
+  +idCompra
+  +fechaPedido
+  +fechaEntregaAcordada
+  +proveedor: Proveedor
+  -crear()
+  -mostrar()
+  -conocerProveedor()
+}
+
+class "DetalleDeCompra" as detalleDeCompra {
+  +articulo: Articulo
+  +cantidad
+  +precioCompraUnitaria
+  +fechaEntregaReal
+  -crear()
+  -mostrar()
+  -conocerArticulo() 
+  -calcularSubtotal()
+  -registrarRecepcion()
+}
+
+class "Articulo" as articulo {
+  +nombre
+  +descripcion
+  +costoUnitario
+  +unidadMedida
+  +cantidadStock
+  -crear()
+  -mostrar()
+}
+
+class "Domicilio" as domicilio {
+  +calle
+  +numero
+  +depto
+  +piso 
+  +barrio 
+  +localidad: Localidad
+  +lote
+  +manzana
+  -crear()
+  -mostrar()
+  -conocerLocalidad()
+}
+
+class "Localidad" as localidad {
+  +nombre
+  -crear()
+  -mostrar()
+}
+
+class "Provincia" as provincia {
+  +nombre
+  +localidad: Localidad
+  -crear()
+  -mostrar()
+  -conocerLocalidad()
+}
+
+class "Pais" as pais {
+  +nombre
+  +provincia: Provincia
+  -crear()
+  -mostrar()
+  -conocerProvincia()
+}
+
+proveedor "1" -- "0..*" compras
+compras "1" -- "0..*" detalleDeCompra
+detalleDeCompra "1" -- "1" articulo
+
+@enduml

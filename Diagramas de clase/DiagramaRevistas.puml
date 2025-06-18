@@ -1,0 +1,40 @@
+@startuml Revistas
+
+class "Revista" as revista {
+    +nombre
+    +genero
+    +formato 
+    +codigo
+    +periodicidad
+    +edicion: Edicion[]
+    -crear()
+    -mostrar()
+    -conocerEdicion()
+}
+
+class "Edicion" as edicion {
+    +numeroEdicion
+    +temario
+    +precio
+    +articulo: Articulo[]
+    -crear()
+    -mostrar()
+    -conocerArticulo()
+}
+
+class "Articulo" as articulo {
+    +titulo
+    +autor
+    +tema
+    +fechaArticulo
+    -crear()
+    -mostrar()
+}
+class "Periodista" as periodista {
+    +nombre
+    +apellido
+    +especialidad
+    +email
+    -crear()
+    -mostrar()
+}

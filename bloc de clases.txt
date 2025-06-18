@@ -1,0 +1,17 @@
+Un objeto tiene: Estado, comportamiento e identidad.
+Estado: Se asumen valores que indican su estado, suponiendo un objeto termo, compuesto de altura, peso, capacidad,
+color, etc.
+Comportamiento:
+Identidad:
+
+Los objetos pueden comunicarse a traves del intercambio de mensajes. Por ej: El encendido o apagado de algun objeto
+"llave de luz", al accionarlo, envia un mensaje al objeto "foco" permitiendo que este se encienda o apague.
+
+Un objeto es una instancia de una clase.
+
+Conceptos de la programacion orientada a objetos: Polimorfismo, Encapsulamiento, Abstraccion, Modularidad, Jerarquia. 
+
+Las transacciones como ventas o compras, son clases tambien.
+
+Ejemplos de objetos: Cosas, personas , transacciones, lugares, eventos, otros, etc.
+

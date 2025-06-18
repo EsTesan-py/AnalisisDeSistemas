@@ -1,0 +1,31 @@
+verificar vehiculo en cuenta de cliente
+verificar saldo negativo
+--
+Regla de negocio - > Tarifa diaria, si ya estuve a la mañana, puedo estacionar a la tarde y noche.
+--
+Clases	- Proveedores	- Compras			-DetalleDeCompra		- Articulos
+	nombre		idCompra			articulo: Articulos		nombre
+	apellido	fechaPedido			cantidad			descripcion
+	razonSocial	fechaEntregaAcordada		precioCompraUni			costoUnitario
+	cuit										unidadMedida
+	condIva		proveedor:Proveedor						cantidadStock
+	domicilio	/articulo/
+	telefono	/cantidad/
+	mail
+Metodos
+	--		--				--				--
+	crear()		crear()				crear()				crear()	
+	mostrar()	mostrar()			mostrar()			mostrar()
+			conocerProveedor()		conocerArticulo()
+			conocerDetalledeCompra()	calcularSubtotal()
+			calcularTotalCompra()		registrarRecepcion()
+--
+el atributo proveedor en la clase compra, va a ser "puntero" a la clase Proveedor
+la clase detalle de compra tiene una relacion de agregacion con la clase Compras
+el atributo articulo en la clase detalle de compra, va a ser "puntero" a la clase Articulos
+Compras -1..*>DetalleDeCompra
+DetalleDeCompra -1>Articulos
+-
+|idCompra	|fechaPedido	|fechaEntregaAcordada	|montoTotal	|Proveedor	|Articulo	|Cantidad	|
+|1		|2/5/2025	|4/5/2025		|		|		|		|		|
+warp console

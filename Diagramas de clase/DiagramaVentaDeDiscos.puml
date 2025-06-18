@@ -1,0 +1,85 @@
+@startuml VentaDeDiscos
+
+class "Sello" as sello {
+    +nombre
+    +domicilio
+    +telefono
+    +email
+    -crear()
+    -mostrar()
+}
+
+class "Genero" as genero {
+    +nombre
+    +descripcion
+    -crear()
+    -mostrar()
+}
+
+class "Venta" as venta {
+    +nroVenta
+    +fechaVenta
+    +nombreCliente
+    +cantidad
+    +preioUnitario
+    +descuento
+    +detalleVenta: DetalleVenta
+    -crear()
+    -mostrar()
+    -calcularImporteTotal()
+    -calcularDescuento()
+    -conocerDetalleVenta()
+    -calcularCantDiscos()
+}
+
+class "Disco" as disco {
+    +nombreAlbum
+    +cantidadExistente
+    +precioUnitario
+    +añoDeEdicion
+    +sello: Sello
+    +genero: Genero
+    +interprete: Interprete
+    -crear()
+    -mostrar()
+    -conocerSello()
+    -conocerGenero()
+    -conocerInterprete()
+}
+
+class "Interprete" as interprete {
+    +nombre
+    +apellido
+    +nacionalidad: Nacionalidad
+    -crear()
+    -mostrar()
+    -conocerNacionalidad()
+}
+
+/'Coloco esta clase nacionalidad especificamente porque el enunciado indica que necesita un listado especifico sobre la nacionalidad del interprete'/
+
+class "Nacionalidad" as nacionalidad {
+    +nombre
+    +descripcion
+    -crear()
+    -mostrar()
+    -tomarNombre()
+    -mostrarNombre()
+    -tomarDescripcion()
+    -mostrarDescripcion()
+}   
+note right of nacionalidad : Los metodos de seteo aca son extensibles a todas las clases.
+
+class "DetalleVenta" as detalleVenta {
+    +descripcion
+    crear()
+    mostrar()
+    }
+
+
+venta --"1" detalleVenta
+detalleVenta --"1" disco
+disco --"1" sello
+disco --"1" genero
+disco --"1..*" interprete
+interprete --"1" nacionalidad

@@ -1,0 +1,5 @@
+La unica clase que puede tener un IDENTIFICADOR es la clase de VENTA.
+El importe total, si se calcula, no se pone como atributo de la VENTA, sino que se calcula en la misma.
+La relacion de composicion es una relacion FUERTE, si no existe la primer parte, se desintegra la segunda; Por ejemplo: Si eliminamos venta, se elimina detalleventa.
+Un metodo actua sobre su propio objeto o sobre un objeto sobre los cuales se relacionen jerarquicamente.
+A la hora de tener LISTADOS o INFORMES solo debemos tener en cuenta si poseemos los atributos y metodos necesarios para saber si PODRIAMOS hacerlos, pero no debemos modelarlos en si.
