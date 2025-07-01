@@ -1,0 +1,124 @@
+@startuml
+class Departamento {
+codDepto
+nombre
+fechaHoraCreación
+ubicación
+empleado:Empleado
+crear()
+mostrar()
+conocerEmpleado()
+calcularAntiguedad()
+calcularCantEmpleados()
+}
+
+
+class Persona {
+nombre
+apellido
+dNI
+fechaNacimiento
+mail
+crear()
+mostrar()
+calcularEdad()
+}
+
+class Empleado {
+legajo
+fechaIngreso
+fechaBaja
+usuario
+contraseña
+rol
+crear()
+mostrar()
+calcularEdad()
+calcularAntiguedad()
+calcularPermanencia()
+}
+
+class Pedido {
+numPedido
+fechaHoraPedido
+vendedor:Empleado
+detalle:DetallePedido
+tipoEntrega
+fechaEstimadaEntrega
+domicilio:Domicilio
+estado:Estado
+sucursal:Sucursal
+crear()
+mostrar()
+conocerEmpleado()
+conocerDetallePedido()
+conocerEstado()
+conocerDomicilio()
+conocerSucursal()
+calcularTotal()
+}
+
+class DetallePedido {
+articulo:Ejemplar
+precio
+crear()
+mostrar()
+conocerLibro()
+}
+
+class Entrega {
+codEntrega
+nombrePersonaReceptora
+repartidor:Empleado
+fechaEntregaReal
+crear()
+mostrar()
+conocerEmpleado()
+}
+
+class DetalleEntrega {
+articulo:DetallePedido
+crear()
+mostrar()
+conocerDetallePedido()
+}
+
+class Cliente {
+pedido:Pedido
+}
+
+class Libro {
+ISBN
+nombre
+autor
+genero
+reseña
+cantidad
+ejemplar:Ejemplar
+crear()
+mostrar()
+conocerEjemplar()
+calcularCantEjemplares()
+}
+
+class Ejemplar {
+codigo
+edición
+precioUnitario
+crear()
+mostrar()
+}
+
+Empleado "1--*" <- Departamento :#2
+Cliente -> "1--*" Pedido :#3
+Pedido -> "1" Empleado :#3
+Pedido o--> "1..*" DetallePedido :#6
+DetallePedido --> "1" Ejemplar :#10
+Pedido -> "0..*" Entrega :#7
+Libro -> "1..*" Ejemplar :#11
+Entrega --> "1..*" DetalleEntrega :#6
+DetallePedido --> "1" DetalleEntrega :#8
+
+Persona <|--- Cliente :#13
+Persona <|--- Empleado :#13
+@enduml

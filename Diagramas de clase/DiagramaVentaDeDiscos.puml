@@ -9,6 +9,7 @@ class "Sello" as sello {
     -mostrar()
 }
 
+
 class "Genero" as genero {
     +nombre
     +descripcion
@@ -67,7 +68,7 @@ class "Nacionalidad" as nacionalidad {
     -mostrarNombre()
     -tomarDescripcion()
     -mostrarDescripcion()
-}   
+}
 note right of nacionalidad : Los metodos de seteo aca son extensibles a todas las clases.
 
 class "DetalleVenta" as detalleVenta {
