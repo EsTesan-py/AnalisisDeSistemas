@@ -31,7 +31,7 @@ class "DetalleDeCompra" as detalleDeCompra {
   +fechaEntregaReal
   -crear()
   -mostrar()
-  -conocerArticulo() 
+  -conocerArticulo()
   -calcularSubtotal()
   -registrarRecepcion()
 }
