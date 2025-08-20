@@ -1,0 +1,6 @@
+Vazquez, C. E., & Simões, G. S. (2016). Ingeniería de Requisitos: software orientado al negocio. Brasport. Cap 6.5 - 8 (8.1 a 8.5 - 8.8 - 8.12)
+Booch, G., Rumbaugh, J., Jacobson, I., Molina, J. J. G., & Martínez, J. S. (2006). El lenguaje unificado de modelado: guía del usuario. 2da ed. Addison-Wesley. Cap 4 a 8 - 17 a 18 - 22
+Jacobson, I., Rumbaugh, J., & Booch, G. (2007). El Lenguaje Unificado de Modelado, Manual de Referencia, 2/ed. Cap 4 - 5 - 6
+Alaimo, M., & Salías, M. (2015). Proyectos ágiles con# Scrum: flexibilidad, aprendizaje, innovación y colaboración en contextos complejos. Kleer. Cap 4.
+-
+
