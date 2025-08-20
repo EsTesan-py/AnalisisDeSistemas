@@ -1,0 +1,58 @@
+@startuml Prestamo
+/'Ahora es posible prestar mas de un objeto a un amigo, la fecha de devolucion de cada objeto para ese amigo es la misma. Tener en cuenta que un amigo puede resultar no ser tan cumplidor a la hora de devolver los objetos.
+Ademas la persona desea poder saber que tipos de objetos son los que mas le solicitan. Tambien quiere poder realizar una clasificacion de sus amigos segun el lugar por el cual los conoce.'/
+
+
+class "Amigo" as amigo {
+    +nombre
+    +apellido
+    +direccion
+    +telefono
+    +procedenciaAmigo: ProcedenciaAmigo []
+    +prestamo: Prestamo []
+    +cantidadPrestamos
+    -crear()
+    -mostrar()
+    -conocerProcedenciaAmigo()
+    -conocerPrestamo()
+
+}
+class "Prestamo" as prestamo {
+    +fechaPrestamo
+    +fechaDevolucionEstimada
+    +fechaDevolucionReal
+    +detalleprestamo: DetallePrestamo []
+    -crear()
+    -mostrar()
+    -calcularDiasDeDevolucion()
+
+
+}
+class "DetallePrestamo" as detallePrestamo {
+
+}
+class "Objeto" as objeto {
+    +nombre
+    +descripcion
+    +tipoObjeto: TipoObjeto []
+    +estadoObjeto: EstadoObjeto []
+    -crear()
+    -mostrar()
+    -conocerTipoObjeto()
+    -conocerEstadoObjeto()
+}
+class "TipoObjeto" as tipoObjeto {
+    +categoria
+    -crear()
+    -mostrar()
+}
+class "EstadoObjeto" as estadoObjeto {
+    +valor
+    -crear()
+    -mostrar()
+}
+class "ProcedenciaAmigo" as procedenciaAmigo {
+    +origen
+    -crear()
+    mostrar()
+}
