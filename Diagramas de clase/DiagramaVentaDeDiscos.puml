@@ -9,7 +9,6 @@ class "Sello" as sello {
     -mostrar()
 }
 
-
 class "Genero" as genero {
     +nombre
     +descripcion
@@ -73,12 +72,11 @@ note right of nacionalidad : Los metodos de seteo aca son extensibles a todas la
 
 class "DetalleVenta" as detalleVenta {
     +descripcion
-    crear()
-    mostrar()
+    -crear()
+    -mostrar()
     }
 
-
-venta --"1" detalleVenta
+venta *--"1" detalleVenta
 detalleVenta --"1" disco
 disco --"1" sello
 disco --"1" genero

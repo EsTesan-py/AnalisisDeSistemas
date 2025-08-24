@@ -1,112 +1,111 @@
-@startuml
+@startuml clasevirtual
 class Departamento {
-codDepto
-nombre
-fechaHoraCreación
-ubicación
-empleado:Empleado
-crear()
-mostrar()
-conocerEmpleado()
-calcularAntiguedad()
-calcularCantEmpleados()
++codDepto
++nombre
++fechaHoraCreación
++ubicación
++empleado:Empleado
+-crear()
+-mostrar()
+-conocerEmpleado()
+-calcularAntiguedad()
+-calcularCantEmpleados()
 }
 
-
 class Persona {
-nombre
-apellido
-dNI
-fechaNacimiento
-mail
-crear()
-mostrar()
-calcularEdad()
++nombre
++apellido
++dNI
++fechaNacimiento
++mail
+-crear()
+-mostrar()
+-calcularEdad() 
 }
 
 class Empleado {
-legajo
-fechaIngreso
-fechaBaja
-usuario
-contraseña
-rol
-crear()
-mostrar()
-calcularEdad()
-calcularAntiguedad()
-calcularPermanencia()
++legajo
++fechaIngreso
++fechaBaja
++usuario
++contraseña
++rol
+-crear()
+-mostrar()
+-calcularEdad()
+-calcularAntiguedad()
+-calcularPermanencia()
 }
 
 class Pedido {
-numPedido
-fechaHoraPedido
-vendedor:Empleado
-detalle:DetallePedido
-tipoEntrega
-fechaEstimadaEntrega
-domicilio:Domicilio
-estado:Estado
-sucursal:Sucursal
-crear()
-mostrar()
-conocerEmpleado()
-conocerDetallePedido()
-conocerEstado()
-conocerDomicilio()
-conocerSucursal()
-calcularTotal()
++numPedido
++fechaHoraPedido
++vendedor:Empleado
++detalle:DetallePedido
++tipoEntrega
++fechaEstimadaEntrega
++domicilio:Domicilio
++estado:Estado
++sucursal:Sucursal
+-crear()
+-mostrar()
+-conocerEmpleado()
+-conocerDetallePedido()
+-conocerEstado()
+-conocerDomicilio()
+-conocerSucursal()
+-calcularTotal()
 }
 
 class DetallePedido {
-articulo:Ejemplar
-precio
-crear()
-mostrar()
-conocerLibro()
++articulo:Ejemplar
++precio
+-crear()
+-mostrar()
+-conocerLibro()
 }
 
 class Entrega {
-codEntrega
-nombrePersonaReceptora
-repartidor:Empleado
-fechaEntregaReal
-crear()
-mostrar()
-conocerEmpleado()
++codEntrega
++nombrePersonaReceptora
++repartidor:Empleado
++fechaEntregaReal
+-crear()
+-mostrar()
+-conocerEmpleado()
 }
 
 class DetalleEntrega {
-articulo:DetallePedido
-crear()
-mostrar()
-conocerDetallePedido()
++articulo:DetallePedido
+-crear()
+-mostrar()
+-conocerDetallePedido()
 }
 
 class Cliente {
-pedido:Pedido
++pedido:Pedido
 }
 
 class Libro {
-ISBN
-nombre
-autor
-genero
-reseña
-cantidad
-ejemplar:Ejemplar
-crear()
-mostrar()
-conocerEjemplar()
-calcularCantEjemplares()
++ISBN
++nombre
++autor
++genero
++reseña
++cantidad
++ejemplar:Ejemplar
+-crear()
+-mostrar()
+-conocerEjemplar()
+-calcularCantEjemplares()
 }
 
 class Ejemplar {
-codigo
-edición
-precioUnitario
-crear()
-mostrar()
++codigo
++edición
++precioUnitario
+-crear()
+-mostrar()
 }
 
 Empleado "1--*" <- Departamento :#2
