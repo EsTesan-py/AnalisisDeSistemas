@@ -1,0 +1,126 @@
+@startuml ComidaRapida
+/'La casa de comidas rápidas “Comida Argentina” se dedica a la elaboración y comercialización de
+diversos menús. Entre los productos que se preparan se encuentran sándwich de hamburguesas,
+lomitos, papas, ensaladas.
+El proceso de producción y venta de menú es el siguiente:
+Cuando el cliente se acerca al mostrador es atendido por el Empleado de Ventas quien le consulta
+el menú que desea. El cliente selecciona el menú e indica la cantidad deseada –el comprador
+puede incluir más de un tipo de menú en un pedido -. El Empleado de Ventas genera entonces el
+ticket para el pedido, con lo cual se emite una copia del mismo en la cocina del local, en donde el
+cocinero preparará cada menú para el ticket en cuestión. El Empleado de Ventas le cobra al
+cliente y le informa que espere su pedido en el mostrador de entregas.
+A modo de ejemplo, se detalla cómo se conforma cada menú. Menú 1: hamburguesa con queso,
+lechuga y huevo; papas y gaseosa. Menú 2: hamburguesa de pollo con queso y lechuga, papas y
+gaseosa. Menú 3: ensalada cesar y agua, entre otros. Cada menú se conforma de una
+hamburguesa, lomito o ensalada; una porción de papas y una bebida.
+Cuando el menú está listo el cocinero se lo entrega al vendedor y éste llama al cliente por su
+número de ticket para que retire la bandeja del mostrador.'/
+
+/'
+Menu
+Producto
+Cliente
+Recepcionista
+Cocinero
+Empleado - Clase padre
+Domicilio
+TipoDocumento
+Pedido
+EstadoPedido
+DetallePedido
+'/
+
+class "TipoDocumento" as tipoDocumento {
+    +siglas
+    +descripcion
+    -crear()
+    -mostrar()
+}
+
+class "Domicilio" as domicilio {
+    +calle
+    +numero
+    +piso
+    +puerta
+    +localidad
+    +provincia
+    +pais
+    -crear()
+    -mostrar()
+}
+
+class "Empleado" as empleado {
+    +nombre
+    +apellido
+    +fechaNacimiento
+    +tipoDocumento : TipoDocumento[]
+    +domicilio : Domicilio[]
+    +telefono
+    +email
+    +rol
+    +nroEmpleado
+    -crear()
+    -mostrar()
+    -calcularEdad()
+    -conocerTipoDocumento()
+    -conocerDomicilio()
+}
+class "Menu" as menu {
+    +nombre
+    +descripcion
+    +precio
+    +tipoMenu
+    +producto : Producto[]
+    -crear()
+    -mostrar()
+    -conocerProducto()
+}
+class "Pedido" as pedido {
+    +numPedido
+    +nroTicket
+    +fechaHoraPedido
+    +fechaHoraEntrega
+    +estadoPedido : EstadoPedido[]
+    +menú : Menu[]
+    -crear()
+    -mostrar()
+    -conocerMenu()
+    -conocerEstadoPedido()
+    -registrarElaboracion()
+    -registrarEntregaPedido()
+    -calcularTotal()
+}
+class "DetallePedido" as detallePedido {
+    +menu : Menu[]
+    +cantidad
+    +precioUnitario
+    +subtotal
+    -crear()
+    -mostrar()
+    -conocerMenu()
+    -calcularSubtotal()
+}
+class "EstadoPedido" as estadoPedido {
+    +descripcion
+    -crear()
+    -mostrar()
+    -tomardescripcion()
+    -mostrardescripcion()
+}
+note top of estadoPedido
+    Los metodos de seteo en esta clase son extensibles a todas las clases.
+end note
+note left of estadoPedido
+    Pendiente
+    Cancelado
+    Entregado
+end note
+
+class "Producto" as producto {
+    +nombre
+    +descripcion
+    +costoUnitario
+    +cantidadStock
+    -crear()
+    -mostrar()
+}

@@ -1,0 +1,158 @@
+@startuml DiagramaSPA
+/'Un Spa de la ciudad de Córdoba realiza diariamente el registro de turnos para sus clientes, para
+recibir alguna de las terapias que se ofrecen en el spa.
+Las terapias pueden ser por ejemplo de Relax, Desestresante, Reductora, Rejuvenecimiento
+Facial, Masoterapia, etc. En una terapia se incluyen distintos tratamientos (masajes, drenaje,
+limpieza, pulido) y variados elementos cosméticos. El precio de la misma está determinado por
+todos estos elementos. El cliente debe abonar la terapia que va a recibir antes del turno. Cuando
+llega al turno lo atiende uno de los profesionales del spa y al finalizar se registra la conformidad
+del paciente que se le consulta a través de una encuesta.'/
+
+/'Turno
+Cliente
+Terapia
+Tratamiento
+ElementoCosmetico
+Profesional
+Persona - Clase padre
+Domicilio
+TipoDocumento
+Encuesta
+EstadoTurno'/
+
+class "TipoDocumento" as tipoDocumento {
+    +siglas
+    +descripcion
+    -crear()
+    -mostrar()
+}
+
+class "Domicilio" as domicilio {
+    +calle
+    +numero
+    +piso
+    +puerta
+    +localidad
+    +provincia
+    +pais
+    -crear()
+    -mostrar()
+}
+
+class "Persona" as persona {
+    +nombre
+    +apellido
+    +fechaNacimiento
+    +tipoDocumento : TipoDocumento[]
+    +domicilio : Domicilio[]
+    +telefono
+    +email
+    -crear()
+    -mostrar()
+    -calcularEdad()
+    -conocerTipoDocumento()
+    -conocerDomicilio()
+}
+
+class "cliente" as cliente {
+    +numeroCliente
+    +turnos : Turno[]
+    -crear()
+    -mostrar()
+    -conocerTurno()
+}
+class "Profesional" as profesional {
+    +matricula
+    +especialidad
+    -crear()
+    -mostrar()
+}
+
+class "Turno" as turno {
+    +fechaTurno
+    +horaTurno
+    +fecha
+    +hora
+    +ubicacionTurno
+    +nroTurno
+    +fechaCobro
+    +fechaCancelacion
+    +horaCancelacion
+    +fechaFinalizacion
+    +horaFinalizacion
+    +estadoTurno: EstadoTurno[]
+    +profesional : Profesional[]
+    +terapia : Terapia[]
+    +encuesta : Encuesta[]
+    -crear()
+    -mostrar()
+    -registrarCliente()
+    -conocerEncuesta()
+    -conocerProfesional()
+    -conocerTerapia()
+    -registrarCobro()
+    -finalizarTurno()
+    -cancelarTurno()
+}
+
+class "Terapia" as terapia {
+    +nombre
+    +descripcion
+    +precio
+    +tratamiento : Tratamiento[]
+    +elementoCosmetico : ElementoCosmetico[]
+    -crear()
+    -mostrar()
+    -conocerTratamiento()
+    -conocerElementoCosmetico()
+    -calcularPrecio()
+}
+
+class "Tratamiento" as tratamiento {
+    +nombre
+    +descripcion
+    +duracion
+    +precio
+    -crear()
+    -mostrar()
+}
+
+class "ElementoCosmetico" as elementoCosmetico {
+    +nombre
+    +descripcion
+    +marca
+    +precio
+    -crear()
+    -mostrar()
+}
+
+class "Encuesta" as encuesta {
+    +pregunta
+    -crear()
+    -mostrar()
+    -registrarEncuesta()
+}
+
+class "EstadoTurno" as estadoTurno {
+    +descripcion
+    -crear()
+    -mostrar()
+}
+note left of estadoTurno
+    Pendiente
+    Confirmado
+    Cancelado
+    Finalizado
+end note
+
+turno --> "1..*" terapia
+turno --> "1..*" profesional
+turno *--> "1" encuesta
+turno *--> "1" estadoTurno
+persona <|-- cliente
+persona <|-- profesional
+persona *--> "1..*" tipoDocumento
+persona --> "1" domicilio
+cliente --> "1..*" turno
+terapia --> "1..*" tratamiento
+terapia --> "1..*" elementoCosmetico
