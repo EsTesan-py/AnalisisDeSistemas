@@ -1,0 +1,3 @@
+¿Decir objeto es lo misma que decir instancia de una clase?
+En una transaccion siempre debemos tener el detalle de la transaccion ¿Como diferencio que atributos y metodos debe tener cada una de estas dos clases?
+¿Podrias explicar bien los actores, participantes, lugares, roles, etc?

@@ -10,3 +10,6 @@ Será posible tener una hoja de PATRONES para el parcial.
 Los metodos de seteo son funciones para actualizar informacion de clases, estos se colocan en la clase mas corta posible.
 Nunca debe existir una clase INFORME que responda la pregunta o consigna de conseguir algun tipo de informe.
 Un metodo actua sobre su misma instancia de clase y sobre las subsecuentes.
+Creando la clase PERSONA, agrego los atributos puntero de TipoDocumento y Domicilio.
+Una clase de persona debe tener el metodo para calcular su edad (Si existe el atributo de fecha de nacimiento).
+Por patron, el cliente puede ser que debe conocer la transaccion. Por ejemplo: Cliente --> Contrato, pero no necesariamente debe ser explicita esta regla.
