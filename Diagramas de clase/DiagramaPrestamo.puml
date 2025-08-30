@@ -54,5 +54,5 @@ class "EstadoObjeto" as estadoObjeto {
 class "ProcedenciaAmigo" as procedenciaAmigo {
     +origen
     -crear()
-    mostrar()
+    -mostrar()
 }

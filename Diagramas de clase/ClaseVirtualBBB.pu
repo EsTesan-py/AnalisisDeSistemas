@@ -108,7 +108,7 @@ class Ejemplar {
 -mostrar()
 }
 
-Empleado "1--*" <- Departamento :#2
+Empleado "1..*" <- Departamento :#2
 Cliente -> "1--*" Pedido :#3
 Pedido -> "1" Empleado :#3
 Pedido o--> "1..*" DetallePedido :#6

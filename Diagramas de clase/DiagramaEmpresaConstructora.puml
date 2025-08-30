@@ -1,0 +1,111 @@
+@startuml EmpresaC
+
+/'Una empresa constructora emprende distintos proyectos de construcción de viviendas. 
+En cada proyecto participan varias personas que pertenecen a diversos departamentos. La empresa asigna personal de estos departamentos a un proyecto. En un momento dado un empleado está asignado a un único proyecto. De cada empleado se conocen sus datos personales, además de su profesión u oficio, número de legajo y número de matrícula si es profesional.
+Cada proyecto tiene un presupuesto con una fecha de inicio y una fecha de finalización prevista y un importe asignado. 
+En cada proyecto, a cada empleado se le asigna una función a desempeñar, y se define el monto que percibirá según la función asignada. 
+Cuando finaliza el proyecto, cada participante recibe su comisión acordada.
+Esta empresa constructora trabaja con distintas inmobiliarias de la ciudad, las que comercializan y financian la venta de los proyectos. Un proyecto posee una sola inmobiliaria asociada. Es necesario saber quién es el referente de dicha inmobiliaria que tiene a cargo el proyecto.
+
+El PM del proyecto desea saber:
+Cuántos empleados están asignados a cada proyecto.
+Si hubo desvío en el tiempo planificado de finalización del proyecto y de cuánto tiempo fué.'/
+
+/'Empresa
+Empleado
+Proyecto
+Departamento
+Inmobiliaria
+Referente'/
+
+class "Empresa" as empresa {
+    +nombre
+    +direccion
+    +telefono
+    +cuilEmpresa
+    +departamento: Departamento []
+    +proyecto: Proyecto []
+    +inmobiliaria: Inmobiliaria []
+    -crear()
+    -mostrar()
+    -conocerDepartamento()
+    -conocerProyecto()
+    -conocerInmobiliaria
+    -calcularCantEmpleados()
+}
+note top of empresa: Este método "calcularCantEmpleados()" recorre todos los departamentos y proyectos asociados a la empresa,sumando la cantidad de empleados asignados a cada proyecto.
+
+
+class "Departamento" as departamento {
+    +nombre
+    +descripcion
+    +empleado: Empleado []
+    -crear()
+    -mostrar()
+    -conocerEmpleado()
+    -tomarnombre()
+    -mostrarNombre()
+    -tomarDescripcion()
+    -mostrarDescripcion()
+    -tomarEmpleado()
+    -mostrarEmpleado()
+}
+note top of departamento : Los metodos de seteo colocados en esta clase son extensibles a todas las clases.
+
+class "Proyecto" as proyecto {
+    +nombre
+    +fechaInicio
+    +fechaFinPrevista
+    +fechaFinReal
+    +importeAsignado
+    +cantidadEmpleados
+    +inmobiliaria: Inmobiliaria[]
+    -crear()
+    -mostrar()
+    -conocerInmobiliaria()
+    -calcularDesvioTiempo()
+}
+note top of proyecto:Si la fecha de finalización real es posterior a la fecha prevista, el desvío es la diferencia entre ambas fechas. Si la fecha de finalización real es anterior o igual a la fecha prevista, el desvío es cero.
+
+
+class "Empleado" as empleado {
+    +nombre
+    +apellido
+    +dni 
+    +profesion 
+    +legajo
+    +matricula
+    +funcion
+    +montoXFuncion
+    -crear()
+    -mostrar()
+}
+
+class "Inmobiliaria" as inmobiliaria {
+    +nombre
+    +direccion
+    +telefono
+    +cuit
+    +referente: Referente[]
+    -crear()
+    -mostrar()
+    -conocerReferente()
+}
+
+class "Referente" as referente {
+    +nombre
+    +apellido
+    +dni 
+    +telefono
+    +email
+    -crear()
+    -mostrar()
+}
+
+empresa *-->"1..*" departamento : Coleccion–Trabajador (#1)
+empresa *-->"1..*" proyecto : Contenedor–Contenido (#14)
+empresa ->"1..*" inmobiliaria : Asociacion–Otra Asociacion (#12)
+departamento *-->"1..*" empleado : Grupo–Miembro (#16)
+proyecto ->"1" inmobiliaria : Asociacion–Otra Asociacion (#12)
+proyecto ->"1..*" empleado : Participante–Transaccion (#3)
+inmobiliaria ->"1" referente : Grupo–Miembro (#16)
