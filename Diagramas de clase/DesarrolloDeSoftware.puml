@@ -1,0 +1,154 @@
+@startuml DesarrolloDeSoftware
+/'Una empresa de desarrollo de software, tiene un área dedicada a recibir solicitudes de
+mantenimiento, de los productos que desarrolla. Esos productos son adaptados e instalados en
+sus clientes (empresas usuarias del software) según las necesidades propias de cada uno.
+Esta área de soporte está conformada por un grupo de personas que asumen distintos roles, para
+dar solución a las solicitudes de mantenimiento que se reciben. Estos roles son:
+- Encargado de Soporte: encargado de recibir la solicitud de los clientes y registrarla como
+Incidente. Además, debe cerrar los incidentes una vez resueltos.
+- Líder de Producto: encargado de analizar el incidente y asignarlo a un
+Analista/Desarrollador.
+- Analista/Desarrollador: responsable de dar solución al incidente.
+A continuación se describen las actividades que son llevadas a cabo en el área de soporte para
+dar solución a los incidentes recibidos:
+Cuando un usuario de un cliente se comunica con el área de soporte para reportar un incidente,
+es atendido por uno de los Encargado de Soporte del área (ES), que le solicita los siguientes
+datos: razón social (cliente) y producto, con estos datos el ES verifica que el cliente existe y que
+tiene asociado el producto para el cuál desea reportear el incidente. Si el cliente no existe o no
+tiene asociado el producto el ES le informa que los datos son incorrectos para que los comunique nuevamente. Si los datos son correctos, le pide que detalle la siguiente información: usuario (del
+lado del cliente), tipo de incidente (error, modificación, nuevo desarrollo, etc.) descripción del
+incidente, fecha límite de resolución y prioridad (baja, media, alta). El ES verifica que los datos son
+correctos y da de alta el incidente agregando lo siguiente al mismo: producto, estado (Abierto), la
+fecha de recepción del mismo, y el responsable de la recepción.
+El Líder de Producto (LP), diariamente verifica los incidentes que se encuentran en estado
+“Abierto” para los productos que él tiene asignado, para realizar un análisis de los mismos y
+proceder a darles curso. Para ello, toma cada incidente, verifica para que producto del cliente fue
+reportado, realiza el análisis de la posible solución del mismo. En caso de que el cambio sea
+factible de realizar, verifica la disponibilidad de Analista/Desarrollador(A/D) para realizar la
+asignación del incidente y actualiza el incidente con los siguientes datos: fecha asignación, estado
+(Asignado), posible solución, Analista/Desarrollador asignado. En caso de que el cambio no sea
+factible, actualiza el incidente asignándole el estado “No Factible” e indicando las razones de esto.
+Continuamente, cada AD verifica los incidentes que le han sido asignados, y cuando va a
+comenzar la resolución de cada uno de ellos, le cambia inicialmente el estado a “En Desarrollo”.
+Luego, toma el producto correspondiente al cliente, analiza el cambio a realizar, efectúa la
+modificación, realiza las pruebas para verificar que el cambio este correcto, implementa el cambio
+en el cliente en forma remota, realiza la documentación del cambio, y actualiza el incidente con los
+siguientes datos: estado (Finalizado), fecha de resolución, descripción del cambio realizado.
+Todos los días, cada ES, revisa los incidentes que recibió, para verificar si se encuentran en
+estado “Finalizado” o “No Factible”. En caso de que estén finalizados, se envía un mail al usuario
+que lo reportó informándole que el incidente fue resuelto. El usuario debe verificar que el cambio
+fue realizado, y debe responder el mail para abrir un nuevo incidente en caso de que no esté
+conforme con la solución, o indicar que está conforme, para que el ES pueda cerrar el incidente.
+En caso de que no sea factible, el ES envía un mail al usuario informándolo y cierra el incidente.'/
+/' Clases '/
+/' 
+Cliente
+Empleado
+Subclases (EncargadoDeSoporte, LiderDeProducto, AnalistaDesarrollador)
+Producto
+Incidente
+EstadoIncidente'/
+
+class "Cliente" as cliente {
+    +razonSocial
+    +producto: Producto[]
+    -crear()
+    -mostrar()
+    -conocerProducto()
+}
+class "Empleado" as empleado {
+    +nombre
+    +apellido
+    +legajo
+    +email
+    -crear()
+    -mostrar()
+}
+class "EncargadoDeSoporte" as encargadoDeSoporte {
+    -crear()
+    -mostrar()
+    -verificarCliente()
+    -verificarProducto()
+    -registrarIncidente()
+    -revisarIncidentesRecibidos()
+    -enviarMailUsuario()
+    -cerrarIncidente()
+}
+class "LiderDeProducto" as liderDeProducto {
+    -crear()
+    -mostrar()
+    -verificarIncidente()
+    -verificarDisponibilidadAnalista()
+    -asignarIncidente()
+}
+class "AnalistaDesarrollador" as analistaDesarrollador {
+    -crear()
+    -mostrar()
+    -verificarIncidenteAsignado()
+    -cambiarEstadoAEnDesarrollo()
+    -efectuarModificacion()
+    -realizarPruebas()
+    -registrarCambio()
+
+}
+class "Producto" as producto {
+    +nombre
+    +version
+    +cliente: Cliente[]
+    +liderDeProducto: LiderDeProducto[]
+    -crear()
+    -mostrar()
+    -conocerCliente()
+}
+class "Incidente" as incidente {
+    +usuario
+    +tipoIncidente
+    +descripcionIncidente
+    +fechaLimiteResolucion
+    +prioridad
+    +producto: Producto[]
+    +estado: EstadoIncidente[]
+    +fechaRecepcion
+    +responsableRecepcion: EncargadoDeSoporte[]
+    +fechaAsignacion
+    +posibleSolucion
+    +analistaDesarrolladorAsignado: AnalistaDesarrollador[]
+    +fechaResolucion
+    +descripcionCambioRealizado
+    -crear()
+    -mostrar()
+    -conocerProducto()
+    -conocerEstado()
+    -conocerResponsableRecepcion()
+    -conocerAnalistaDesarrolladorAsignado()
+}
+class "EstadoIncidente" as estadoIncidente {
+    +valor
+    -crear()
+    -mostrar()
+    -tomarValor()
+    -mostrarValor()
+}
+note top of estadoIncidente
+Los metodos de seteo de esta clase son extensibles a todas las demas.
+end note
+note right of estadoIncidente
+Valores posibles:
+- Abierto
+- Asignado
+- En Desarrollo
+- Finalizado
+- No Factible
+end note
+
+empleado <|-- encargadoDeSoporte
+empleado <|-- liderDeProducto
+empleado <|-- analistaDesarrollador
+producto -->"1" cliente
+producto -->"1" liderDeProducto
+incidente -->"1" producto
+incidente *-->"1" estadoIncidente
+incidente -->"1" encargadoDeSoporte : responsableRecepcion
+incidente -->"1" analistaDesarrollador : analistaDesarrollador
+
+
