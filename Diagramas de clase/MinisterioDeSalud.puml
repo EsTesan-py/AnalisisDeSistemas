@@ -1,0 +1,149 @@
+@startuml MinisterioDeSalud
+/'Con respecto al registro y control de visitantes en el Ministerio de Salud de la Provincia de
+Córdoba. Cuando una persona ingresa si es empleado debe mostrar su credencial, y si es
+visitante debe dar sus datos a la recepcionista, quien entrega una credencial provisoria con la cual
+puede circular por el ministerio. La recepcionista le consulta qué trámite/s debe hacer y de
+acuerdo a lo expresado le indica a qué área/s debe dirigirse. El visitante se dirige al área y la
+empleada de la oficina verifica que la persona haya pasado por el control de ingreso. De ser así la
+empleada lo atiende para realizar el trámite solicitado.
+Cuando la persona visitante se retira del establecimiento debe volver a pasar por la recepción
+para devolver la credencial.
+El ministerio solicita un sistema de información que permita:
+ Conocer los datos de las personas visitantes ingresan cada día.
+ Conocer Cuántas horas promedio permanecen los visitantes en el ministerio.
+ Conocer Cuáles son las áreas más visitadas.
+ Conocer Cuáles son los trámites más requeridos.
+ Que los encargados de área realicen un breve detalle del trámite realizado por cada
+visitante.
+Clases:
+Persona->Herenciax
+Visitantex
+Empleado
+Credencialx
+Tramitex
+DetalleTramitex
+Areax'/
+
+class "Credencial" as credencial {
++numCredencial
++fechaHoraEntrega
++fechaHoraDevolucion
++tipoCredencial
+-crear()
+-mostrar()
+-registrarHoraEntrada()
+-registrarHoraSalida()
+-calcularTiempoUso()
+}
+
+class "Area" as area {
++nombre
++ubicacion
+-crear()
+-mostrar()
+-registrarIngreso()
+}
+
+class "Tramite" as tramite {
++nombre
++nroTramite
++fechaInicioTramite
++fechaFinTramite
++estadoTramite:EstadoTramite[]
++detalle:DetalleTramite[]
+-crear()
+-mostrar()
+-conocerEstadoTramite()
+-conocerDetalleTramite()
+-registrarTramite()
+}
+
+class "EstadoTramite" as estadoTramite {
++valor
+-crear()
+-mostrar()
+-tomarValor()
+-mostrarValor()
+}
+note left of estadoTramite
+Los metodos de seteo en esta clase son extensibles a todas las demas clases.
+end note
+note bottom of estadoTramite
+Ej: En proceso, Finalizado, Cancelado
+end note
+
+class "DetalleTramite" as detalleTramite {
+    +descripcion
+    +tipoTramite
+    +fechaFinTramiteReal
+    +area:Area[]
+    -crear()
+    -mostrar()
+    -conocerArea()
+    -finalizarTramite()
+    -registrarTipoDeTramite()
+    -registrarDetalleTramite()
+}
+
+class "Persona" as persona {
++nombre
++apellido
++tipoDoc:TipoDocumento[]
++domicilio:Domicilio[]
++telefono
++fechaNacimiento
+-crear()
+-mostrar()
+-conocerTipoDocumento()
+-conocerDomicilio()
+}
+class "TipoDocumento" as tipoDocumento {
++descripcion
++sigla
+-crear()
+-mostrar()
+}
+class "Domicilio" as domicilio {
++calle
++numCalle
++piso
++depto
++localidad
++provincia
++pais
++codPostal
+-crear()
+-mostrar()
+}
+class "Visitante" as visitante {
++credencial:Credencial[]
++tramite:Tramite[]
+-crear()
+-mostrar()
+-conocerTramite()
+-conocerCredencial()
+}
+
+class "Empleado" as empleado {
++credencial:Credencial[]
++area:Area[]
++legajo
++rol
+-crear()
+-mostrar()
+-conocerArea()
+-conocerCredencial
+}
+
+persona <|-- visitante
+persona <|-- empleado
+visitante o-->"1..*" tramite
+visitante -->"1" credencial
+empleado -->"1" credencial
+empleado -->"1" area
+tramite *-->"1..*" detalleTramite
+tramite *-->"1" estadoTramite
+detalleTramite -->"1" area
+persona -->"1" tipoDocumento
+persona -->"1" domicilio
+@enduml

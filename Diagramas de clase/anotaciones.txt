@@ -1,15 +1,35 @@
 La unica clase que puede tener un IDENTIFICADOR es la clase de VENTA.
+
 El importe total, si se calcula, no se pone como atributo de la VENTA, sino que se calcula en la misma.
+
 La relacion de composicion es una relacion FUERTE, si no existe la primer parte, se desintegra la segunda; Por ejemplo: Si eliminamos venta, se elimina detalleventa.
+
 Un metodo actua sobre su propio objeto o sobre un objeto sobre los cuales se relacionen jerarquicamente.
+
 A la hora de tener LISTADOS o INFORMES solo debemos tener en cuenta si poseemos los atributos y metodos necesarios para saber si PODRIAMOS hacerlos, pero no debemos modelarlos en si.
+
 Una relacion de asosiacion quiere representar una asociacion entre una clase y una instancia. Puede referirse como -> "tiene". Pregunta clave para distinguir el patron: "¿Que clase conoce a que clase?".
+
 La navegabilidad tiene valor historico. Se tiene en cuenta desde la primera instanciacion. Ejemplo de caso de prestamo de amigo. Un amigo puede tener muchos prestamos transaccionados.
+
 Normalmente una TRANSACCION tiene un detalle.
+
 Será posible tener una hoja de PATRONES para el parcial.
+
 Los metodos de seteo son funciones para actualizar informacion de clases, estos se colocan en la clase mas corta posible.
+
 Nunca debe existir una clase INFORME que responda la pregunta o consigna de conseguir algun tipo de informe.
+
 Un metodo actua sobre su misma instancia de clase y sobre las subsecuentes.
+
 Creando la clase PERSONA, agrego los atributos puntero de TipoDocumento y Domicilio.
+
 Una clase de persona debe tener el metodo para calcular su edad (Si existe el atributo de fecha de nacimiento).
+
 Por patron, el cliente puede ser que debe conocer la transaccion. Por ejemplo: Cliente --> Contrato, pero no necesariamente debe ser explicita esta regla.
+
+Pedido (transacción): habla de lo global → quién pidió, cuándo, cuánto vale el total, cuál es su estado.
+DetallePedido (detalle): habla de lo particular → qué producto, cuántas unidades, qué precio.
+
+Si el atributo describe el evento entero (número de pedido, cliente, fecha), va en Pedido.
+Si el atributo describe el producto en esa transacción (cantidad, precio, subtotal), va en DetallePedido.
